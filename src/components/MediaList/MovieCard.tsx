@@ -1,8 +1,8 @@
-import { IMediaLists } from '@/models'
-import CircularProgressBar from '../CircularProgressBar'
+import { IMediaList } from "@/models"
+import CircularProgressBar from "../CircularProgressBar"
 
 interface Props {
-	all: IMediaLists[]
+	all: IMediaList[]
 }
 
 function MovieCard({ all }: Props) {

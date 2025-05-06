@@ -1,4 +1,4 @@
-export interface IMediaLists {
+export interface IMediaList {
     adult: boolean,
     backdrop_path: string,
     id: number,

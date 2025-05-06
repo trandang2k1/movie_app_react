@@ -1,3 +1,3 @@
 export type { IPopular } from './IPopular'
-export type { IMediaLists } from './IMediaLists'
+export type { IMediaList } from './IMediaList'
 export type { IMovie } from './IMovie'
