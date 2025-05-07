@@ -22,7 +22,6 @@ function MovieDetailPage() {
 					},
 				}
 			)
-			console.log(res.data)
 			setMovieInfo(res.data)
 		}
 		getMovieId()
@@ -37,6 +36,16 @@ function MovieDetailPage() {
 	const crews = (movieInfo?.credits.crew || []).filter((crew) =>
 		['Director', 'Screenplay', 'Writer'].includes(crew.job)
 	).map(crew => ({id: crew.id, job: crew.job, name: crew.name}))
+
+	const selectCrews = (value: string) => {
+		const select = crews.filter(crew => crew.job === value).map(crew => crew.name)
+		if(select.length >= 2) {
+			return select.join(', ')
+		}
+		else {
+			return select
+		}
+	}
 
 	return (
 		<div className="relative overflow-hidden text-white">
@@ -90,11 +99,11 @@ function MovieDetailPage() {
 					<div className="mt-4 grid grid-cols-2 gap-2">
 						<div>
 							<p className="font-bold">Director</p>
-							<p>{crews.filter(crew => crew.job === "Director").map(crew => crew.name)}</p>
+							<p>{selectCrews("Director")}</p>
 						</div>
 						<div>
 							<p>Writer</p>
-							<p>{crews.filter(crew => crew.job === "Writer").map(crew => crew.name).join(', ')}</p>
+							<p>{selectCrews("Writer")}</p>
 						</div>
 					</div>
 				</div>

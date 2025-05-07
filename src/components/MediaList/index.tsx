@@ -32,8 +32,6 @@ function MediaList({ title, tabs }: Props) {
 		getAllTrending()
 	}, [trendingPart, tabs])
 
-	console.log(mediaList)
-
 	return (
 		<div className="bg-black px-8 py-10 text-[1.2vw] text-white">
 			<div className="pb-10">
