@@ -1,37 +1,11 @@
+import { ICredit } from "./ICredit"
+
 export interface IMovie {
 	adult: boolean
 	backdrop_path: string
 	belongs_to_collection: string
 	budget: number
-	credits: {
-		cast: {
-			adult: boolean
-			gender: number
-			id: number
-			known_for_department: string
-			name: string
-			original_name: string
-			popularity: number
-			profile_path: string
-			cast_id: number
-			character: string
-			credit_id: number
-			order: number
-		}[]
-		crew: {
-			adult: boolean
-			gender: number
-			id: number
-			known_for_department: string
-			name: string
-			original_name: string
-			popularity: number
-			profile_path: string
-			credit_id: string
-			department: string
-			job: string
-		}[]
-	}
+	credits : ICredit
 	genres: {
 		id: number
 		name: string
