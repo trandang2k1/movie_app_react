@@ -1,5 +1,5 @@
-import { FeatureMovies, MediaList } from '../components'
-import { TopRatedTabs, TrendingTabs } from '../types'
+import { FeatureMovies, MediaList } from '@/components'
+import { TopRatedTabs, TrendingTabs } from '@/types'
 
 function HomePage() {
 	return (
