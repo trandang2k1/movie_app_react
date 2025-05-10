@@ -51,7 +51,7 @@ function MovieDetailPage() {
 	}
 
 	return (
-		<div className="relative mt-14 overflow-hidden text-white lg:mt-16">
+		<div className="relative overflow-hidden text-white">
 			<img
 				className="absolute inset-0 brightness-[.2]"
 				src={`https://image.tmdb.org/t/p/original${movieInfo?.backdrop_path}`}

@@ -27,26 +27,24 @@ function FeatureMovies() {
 	}, [])
 
 	return (
-		<div className="bg-black mt-14 lg:mt-20">
-			<div className="relative mx-auto max-w-screen-lg overflow-x-hidden text-white">
-				<div
-					className="flex transition-transform duration-700 ease-in-out"
-					style={{
-						transform: `translateX(-${movies.findIndex((movie) => movie.id === activeMovieId) * 100}%)`,
-					}}
-				>
-					{movies.map((movie) => (
-						<div key={movie.id} className="w-full shrink-0">
-							<Movie movie={movie} />
-						</div>
-					))}
-				</div>
-				<PaginateIndicator
-					movies={movies}
-					activeMovieId={activeMovieId}
-					setActiveMovieId={setActiveMovieId}
-				/>
+		<div className="relative mx-auto max-w-screen-lg overflow-x-hidden text-white">
+			<div
+				className="flex transition-transform duration-700 ease-in-out"
+				style={{
+					transform: `translateX(-${movies.findIndex((movie) => movie.id === activeMovieId) * 100}%)`,
+				}}
+			>
+				{movies.map((movie) => (
+					<div key={movie.id} className="w-full shrink-0">
+						<Movie movie={movie} />
+					</div>
+				))}
 			</div>
+			<PaginateIndicator
+				movies={movies}
+				activeMovieId={activeMovieId}
+				setActiveMovieId={setActiveMovieId}
+			/>
 		</div>
 	)
 }

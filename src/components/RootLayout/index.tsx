@@ -5,7 +5,9 @@ function RootLayout() {
 	return (
 		<>
 			<Header />
-			<Outlet />
+			<div className='bg-black mt-14 lg:mt-20'>
+				<Outlet />
+			</div>
 		</>
 	)
 }
