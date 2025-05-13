@@ -52,7 +52,11 @@ export default tseslint.config({
 	},
 })
 ```
+
 # movie_app_react
+
 # movie_app_react
+
 # movie_app_react
+
 # movie_app_react

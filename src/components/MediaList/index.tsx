@@ -4,7 +4,7 @@ import axios from 'axios'
 import MovieCard from './MovieCard'
 
 interface Props {
-	title: string,
+	title: string
 	tabs: {
 		id: number
 		name: string

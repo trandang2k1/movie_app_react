@@ -1,19 +1,24 @@
-import { IMediaList } from "@/models"
-import CircularProgressBar from "../CircularProgressBar"
-import { useNavigate } from "react-router"
-import { PATH_MOVIE } from "@/contant"
+import { IMediaList } from '@/models'
+import CircularProgressBar from '../CircularProgressBar'
+import { useNavigate } from 'react-router'
+import { PATH_MOVIE } from '@/contant'
 
 interface Props {
 	all: IMediaList[]
 }
 
 function MovieCard({ all }: Props) {
-
 	const navigate = useNavigate()
 
 	return all.map((item) => {
 		return (
-			<div key={item.id} onClick={() => navigate(PATH_MOVIE.replace(":id", `${item.id}`))} className="rounded-lg border cursor-pointer border-slate-800">
+			<div
+				key={item.id}
+				onClick={() =>
+					navigate(PATH_MOVIE.replace(':id', `${item.id}`))
+				}
+				className="cursor-pointer rounded-lg border border-slate-800"
+			>
 				<img
 					className="rounded-lg"
 					src={`https://image.tmdb.org/t/p/original${item.poster_path}`}

@@ -1,11 +1,11 @@
-import { ICredit } from "./ICredit"
+import { ICredit } from './ICredit'
 
 export interface IMovie {
 	adult: boolean
 	backdrop_path: string
 	belongs_to_collection: string
 	budget: number
-	credits : ICredit
+	credits: ICredit
 	genres: {
 		id: number
 		name: string

@@ -5,8 +5,8 @@ function HomePage() {
 	return (
 		<>
 			<FeatureMovies />
-			<MediaList title='Trending' tabs={TrendingTabs}/>
-			<MediaList title='Top Rated' tabs={TopRatedTabs}/>
+			<MediaList title="Trending" tabs={TrendingTabs} />
+			<MediaList title="Top Rated" tabs={TopRatedTabs} />
 		</>
 	)
 }
