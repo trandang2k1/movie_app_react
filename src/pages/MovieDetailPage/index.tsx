@@ -1,31 +1,33 @@
 import CircularProgressBar from '@/components/CircularProgressBar'
+import { useFetch } from '@/hooks'
 import { IMovie } from '@/models'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router'
 
 function MovieDetailPage() {
 	const { id } = useParams()
 	const [movieInfo, setMovieInfo] = useState<IMovie>()
 
-	useEffect(() => {
-		const getMovieId = async () => {
-			const res = await axios.get(
-				`https://api.themoviedb.org/3/movie/${id}?append_to_response=release_dates,credits&language=en-US`,
-				{
-					headers: {
-						accept: 'application/json',
-						Authorization:
-							'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMGVmNWYxMTU4YjkzOTNmYjM2YjkyNGUyZTJjZjEwMiIsIm5iZiI6MTc0NDk2NTA0Mi42NjgsInN1YiI6IjY4MDIwZGIyMmU4OTU4ZjBmOTk5NzFlYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FQsRao0pm9YKNjGNPPYGz89Xx6Ouc8ny1AEYTGD56Kk',
-					},
-				}
-			)
-			setMovieInfo(res.data)
-		}
-		getMovieId()
-	}, [id])
+	useFetch('get', `https://api.themoviedb.org/3/movie/${id}?append_to_response=release_dates,credits&language=en-US`, setMovieInfo, [id])
+
+	// useEffect(() => {
+	// 	const getMovieId = async () => {
+	// 		const res = await axios.get(
+	// 			`https://api.themoviedb.org/3/movie/${id}?append_to_response=release_dates,credits&language=en-US`,
+	// 			{
+	// 				headers: {
+	// 					accept: 'application/json',
+	// 					Authorization:
+	// 						'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMGVmNWYxMTU4YjkzOTNmYjM2YjkyNGUyZTJjZjEwMiIsIm5iZiI6MTc0NDk2NTA0Mi42NjgsInN1YiI6IjY4MDIwZGIyMmU4OTU4ZjBmOTk5NzFlYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FQsRao0pm9YKNjGNPPYGz89Xx6Ouc8ny1AEYTGD56Kk',
+	// 				},
+	// 			}
+	// 		)
+	// 		setMovieInfo(res.data)
+	// 	}
+	// 	getMovieId()
+	// }, [id])
 
 	const certification = (
 		(movieInfo?.release_dates.results || []).find(
