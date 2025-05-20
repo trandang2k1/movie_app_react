@@ -1,8 +1,8 @@
 import { IMediaList } from '@/models'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import MovieCard from './MovieCard'
 import { useFetch } from '@/hooks'
-import axios from 'axios'
+import Loading from '../Loading'
 
 interface Props {
 	title: string
@@ -16,11 +16,13 @@ interface Props {
 function MediaList({ title, tabs }: Props) {
 	const [trendingPart, setTrendingPart] = useState(tabs[0].id)
 	const [mediaList, setMediaList] = useState<IMediaList[]>([])
+	const [isLoading, setIsLoading] = useState(false)
 
 	useFetch(
 		'get',
 		tabs.find((tab) => tab.id === trendingPart)?.url || tabs[0].url,
 		setMediaList,
+		setIsLoading,
 		[trendingPart, tabs]
 	)
 
@@ -41,29 +43,37 @@ function MediaList({ title, tabs }: Props) {
 	// }, [trendingPart, tabs])
 
 	return (
-		<div className="bg-black px-8 py-10 text-[1.2vw] text-white">
-			<div className="pb-10">
-				<div className="mb-10 flex items-center gap-4">
-					<p className="text-[2vw] font-bold">{title}</p>
-					<ul className="flex gap-2 rounded border border-white">
-						{tabs.map((tab) => {
-							return (
-								<li
-									key={tab.id}
-									className={`cursor-pointer rounded px-2 py-1 text-center md:w-[100px] ${trendingPart === tab.id ? 'bg-white text-black' : 'text-white'}`}
-									onClick={() => setTrendingPart(tab.id)}
-								>
-									{tab.name}
-								</li>
-							)
-						})}
-					</ul>
+		<>
+			{!isLoading ? (
+				<div className="bg-black px-8 py-10 text-[1.2vw] text-white">
+					<div className="pb-10">
+						<div className="mb-10 flex items-center gap-4">
+							<p className="text-[2vw] font-bold">{title}</p>
+							<ul className="flex gap-2 rounded border border-white">
+								{tabs.map((tab) => {
+									return (
+										<li
+											key={tab.id}
+											className={`cursor-pointer rounded px-2 py-1 text-center md:w-[100px] ${trendingPart === tab.id ? 'bg-white text-black' : 'text-white'}`}
+											onClick={() =>
+												setTrendingPart(tab.id)
+											}
+										>
+											{tab.name}
+										</li>
+									)
+								})}
+							</ul>
+						</div>
+						<div className="grid grid-cols-4 gap-4 lg:gap-6">
+							<MovieCard all={mediaList} />
+						</div>
+					</div>
 				</div>
-				<div className="grid grid-cols-4 gap-4 lg:gap-6">
-					<MovieCard all={mediaList} />
-				</div>
-			</div>
-		</div>
+			) : (
+				<Loading />
+			)}
+		</>
 	)
 }
 
