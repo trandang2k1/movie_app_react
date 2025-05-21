@@ -4,38 +4,33 @@ import { useNavigate } from 'react-router'
 import { PATH_MOVIE } from '@/contant'
 
 interface Props {
-	all: IMediaList[]
+	id: number
+	posterPath: string
+	voteAverage: number
+	title: string
+	releaseDate: string
 }
 
-function MovieCard({ all }: Props) {
+function MovieCard({ id, posterPath, voteAverage, title, releaseDate }: Props) {
 	const navigate = useNavigate()
-
-	return all.map((item) => {
-		return (
-			<div
-				key={item.id}
-				onClick={() =>
-					navigate(PATH_MOVIE.replace(':id', `${item.id}`))
-				}
-				className="cursor-pointer rounded-lg border border-slate-800"
-			>
-				<img
-					className="rounded-lg"
-					src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
-					alt=""
-				/>
-				<div className="relative -top-[1.5vw] px-4 py-2">
-					<CircularProgressBar
-						percent={Math.round(item.vote_average * 10)}
-					/>
-					<p className="mt-2 font-bold">{item.title || item.name}</p>
-					<p className="text-slate-300">
-						{item.release_date || item.first_air_date}
-					</p>
-				</div>
+	return (
+		<div
+			key={id}
+			onClick={() => navigate(PATH_MOVIE.replace(':id', `${id}`))}
+			className="cursor-pointer rounded-lg border border-slate-800"
+		>
+			<img
+				className="rounded-lg"
+				src={`https://image.tmdb.org/t/p/original${posterPath}`}
+				alt=""
+			/>
+			<div className="relative -top-[1.5vw] px-4 py-2">
+				<CircularProgressBar percent={Math.round(voteAverage * 10)} />
+				<p className="mt-2 font-bold">{title}</p>
+				<p className="text-slate-300">{releaseDate}</p>
 			</div>
-		)
-	})
+		</div>
+	)
 	// <div className="border border-slate-800 rounded-lg">
 	// 	<img
 	// 		className="rounded-lg"

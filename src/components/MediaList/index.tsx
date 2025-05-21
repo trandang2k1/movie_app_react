@@ -66,7 +66,16 @@ function MediaList({ title, tabs }: Props) {
 							</ul>
 						</div>
 						<div className="grid grid-cols-4 gap-4 lg:gap-6">
-							<MovieCard all={mediaList} />
+							{mediaList.map((item) => (
+								<MovieCard
+									key={item.id}
+									id={item.id}
+									posterPath={item.poster_path}
+									voteAverage={item.vote_average}
+									title={item.title || item.name}
+									releaseDate={item.release_date || item.first_air_date}
+								/>
+							))}
 						</div>
 					</div>
 				</div>
