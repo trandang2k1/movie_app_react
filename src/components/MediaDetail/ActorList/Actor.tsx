@@ -10,7 +10,7 @@ interface Props {
 function Actor({ id, name, profilePath, character }: Props) {
 	return (
 		<div
-			className="rounded-t-lg border border-slate-200 break-words shadow-sm"
+			className="rounded-lg border border-slate-200 break-words shadow-sm"
 			key={id}
 		>
 			<img

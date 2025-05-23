@@ -36,7 +36,7 @@ function Banner({ mediaInfo, isLoading }: Props) {
 	return (
 		<div>
 			{!isLoading ? (
-				<div className="relative overflow-hidden text-white">
+				<div className="relative overflow-hidden text-white shadow-md shadow-slate-400">
 					<img
 						className="absolute inset-0 brightness-[.2]"
 						src={`https://image.tmdb.org/t/p/original${mediaInfo?.backdrop_path}`}

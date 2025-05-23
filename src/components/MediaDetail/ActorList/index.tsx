@@ -1,16 +1,18 @@
-import { ICredit, IRecommendations } from '@/models'
+import { ICredit, IMovie, IRecommendations } from '@/models'
 import Actor from './Actor'
 import { useState } from 'react'
 import { useFetch } from '@/hooks'
 import { useParams } from 'react-router'
 import RecommendationList from './RecommendationList'
 import Loading from '@/components/Loading'
+import Information from './Information'
 
 interface Props {
 	mediaInfo?: ICredit
+	movieInfo?: IMovie
 }
 
-function ActorList({ mediaInfo }: Props) {
+function ActorList({ mediaInfo, movieInfo }: Props) {
 	const { id } = useParams()
 	const [show, setShow] = useState(false)
 	const moreShow = show ? mediaInfo?.cast : mediaInfo?.cast.slice(0, 4)
@@ -58,6 +60,7 @@ function ActorList({ mediaInfo }: Props) {
 				</div>
 				<div className="flex-1">
 					<h1 className="mb-8 text-2xl font-bold">Information</h1>
+					<Information movieInfo={movieInfo}/>
 				</div>
 			</div>
 		</div>

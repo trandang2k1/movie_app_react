@@ -37,7 +37,7 @@ function MovieDetailPage() {
 	return (
 		<div>
 			<Banner mediaInfo={movieInfo} isLoading={isLoading} />
-			<ActorList mediaInfo={movieInfo?.credits}/>
+			<ActorList mediaInfo={movieInfo?.credits} movieInfo={movieInfo}/>
 		</div>
 	)
 }
