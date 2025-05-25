@@ -22,8 +22,7 @@ function MediaList({ title, tabs }: Props) {
 		'get',
 		tabs.find((tab) => tab.id === trendingPart)?.url || tabs[0].url,
 		setMediaList,
-		setIsLoading,
-		[trendingPart, tabs]
+		setIsLoading
 	)
 
 	// useEffect(() => {
@@ -73,7 +72,9 @@ function MediaList({ title, tabs }: Props) {
 									posterPath={item.poster_path}
 									voteAverage={item.vote_average}
 									title={item.title || item.name}
-									releaseDate={item.release_date || item.first_air_date}
+									releaseDate={
+										item.release_date || item.first_air_date
+									}
 								/>
 							))}
 						</div>

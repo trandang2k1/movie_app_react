@@ -8,7 +8,7 @@ interface Props {
 
 function RecommendationList({ mediaList }: Props) {
 	const [show, setShow] = useState(false)
-	const someRecom = show ? mediaList : mediaList.slice(0, 4)
+	const someRecom = show ? mediaList : mediaList.slice(0, 8)
 
 	return (
 		<div>

@@ -13,10 +13,9 @@ function FeatureMovies() {
 
 	useFetch(
 		'get',
-		'https://api.themoviedb.org/3/movie/popular',
+		'/movie/popular',
 		setMovies,
-		setIsLoading,
-		[]
+		setIsLoading
 	)
 
 	// useEffect(() => {

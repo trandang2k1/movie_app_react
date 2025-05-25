@@ -11,10 +11,9 @@ function MovieDetailPage() {
 
 	useFetch(
 		'get',
-		`https://api.themoviedb.org/3/movie/${id}?append_to_response=release_dates,credits&language=en-US`,
+		`/movie/${id}?append_to_response=release_dates,credits&language=en-US`,
 		setMovieInfo,
-		setIsLoading,
-		[id]
+		setIsLoading
 	)
 
 	// useEffect(() => {
@@ -37,7 +36,7 @@ function MovieDetailPage() {
 	return (
 		<div>
 			<Banner mediaInfo={movieInfo} isLoading={isLoading} />
-			<ActorList mediaInfo={movieInfo?.credits} movieInfo={movieInfo}/>
+			<ActorList mediaInfo={movieInfo?.credits} movieInfo={movieInfo} />
 		</div>
 	)
 }

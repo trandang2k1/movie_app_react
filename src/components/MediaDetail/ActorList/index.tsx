@@ -23,10 +23,9 @@ function ActorList({ mediaInfo, movieInfo }: Props) {
 
 	useFetch(
 		'get',
-		`https://api.themoviedb.org/3/movie/${id}/recommendations`,
+		`/movie/${id}/recommendations`,
 		setRecommendations,
-		setIsLoading,
-		[id]
+		setIsLoading
 	)
 
 	return (
@@ -60,7 +59,7 @@ function ActorList({ mediaInfo, movieInfo }: Props) {
 				</div>
 				<div className="flex-1">
 					<h1 className="mb-8 text-2xl font-bold">Information</h1>
-					<Information movieInfo={movieInfo}/>
+					<Information movieInfo={movieInfo} />
 				</div>
 			</div>
 		</div>

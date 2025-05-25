@@ -1,12 +1,16 @@
 import axios from 'axios'
 import { useEffect } from 'react'
 
+const DEFAULT_HEADERS = {
+	accept: 'application/json',
+	Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+}
+
 const useFetch = <T>(
 	method: string,
 	url: string,
 	arr: (data: T[] & T) => void,
-	isLoading: (loading: boolean) => void,
-	dependency?: any
+	isLoading: (loading: boolean) => void
 ) => {
 	useEffect(() => {
 		const fetchData = async () => {
@@ -14,12 +18,9 @@ const useFetch = <T>(
 				isLoading(true)
 				const res = await axios({
 					method: method,
-					url: url,
+					url: `${import.meta.env.VITE_API_HOST}${url}`,
 					headers: {
-						accept: 'application/json',
-						'Content-Type': 'application/json',
-						Authorization:
-							'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMGVmNWYxMTU4YjkzOTNmYjM2YjkyNGUyZTJjZjEwMiIsIm5iZiI6MTc0NDk2NTA0Mi42NjgsInN1YiI6IjY4MDIwZGIyMmU4OTU4ZjBmOTk5NzFlYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FQsRao0pm9YKNjGNPPYGz89Xx6Ouc8ny1AEYTGD56Kk',
+						...DEFAULT_HEADERS,
 					},
 				})
 				arr(
@@ -33,7 +34,7 @@ const useFetch = <T>(
 			}
 		}
 		fetchData()
-	}, [...dependency])
+	}, [url])
 }
 
 export default useFetch
