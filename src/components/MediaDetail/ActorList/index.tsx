@@ -14,19 +14,9 @@ interface Props {
 
 function ActorList({ mediaInfo, movieInfo }: Props) {
 	const { id } = useParams()
+	const { data: recommendations, isLoading } = useFetch<IRecommendations[]>('get', `/movie/${id}/recommendations`)
 	const [show, setShow] = useState(false)
 	const moreShow = show ? mediaInfo?.cast : mediaInfo?.cast.slice(0, 4)
-	const [recommendations, setRecommendations] = useState<IRecommendations[]>(
-		[]
-	)
-	const [isLoading, setIsLoading] = useState(false)
-
-	useFetch(
-		'get',
-		`/movie/${id}/recommendations`,
-		setRecommendations,
-		setIsLoading
-	)
 
 	return (
 		<div className="bg-black text-[1.2vw] text-white">
@@ -52,7 +42,7 @@ function ActorList({ mediaInfo, movieInfo }: Props) {
 					</p>
 					<h1 className="py-8 text-2xl font-bold">More like this</h1>
 					{!isLoading ? (
-						<RecommendationList mediaList={recommendations} />
+						<RecommendationList mediaList={(recommendations || [])} />
 					) : (
 						<Loading />
 					)}

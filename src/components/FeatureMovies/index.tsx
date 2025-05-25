@@ -6,17 +6,10 @@ import { useFetch } from '@/hooks'
 import Loading from '../Loading'
 
 function FeatureMovies() {
-	const [movies, setMovies] = useState<IPopular[]>([])
 	const [activeMovieId, setActiveMovieId] = useState(0)
-	const [isLoading, setIsLoading] = useState(false)
-	const someMovies = movies.slice(0, 4)
+	const { data: movies, isLoading } = useFetch<IPopular[]>('get', '/movie/popular')
+	const someMovies = (movies ?? []).slice(0, 4)
 
-	useFetch(
-		'get',
-		'/movie/popular',
-		setMovies,
-		setIsLoading
-	)
 
 	// useEffect(() => {
 	// 	const getMovies = async () => {
@@ -41,7 +34,7 @@ function FeatureMovies() {
 			<div
 				className="flex transition-transform duration-700 ease-in-out"
 				style={{
-					transform: `translateX(-${someMovies.findIndex((movie) => movie.id === activeMovieId) * 100}%)`,
+					transform: `translateX(-${someMovies.findIndex(movie => movie.id === activeMovieId) * 100}%)`,
 				}}
 			>
 				{!isLoading ? (

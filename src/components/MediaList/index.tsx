@@ -15,14 +15,10 @@ interface Props {
 
 function MediaList({ title, tabs }: Props) {
 	const [trendingPart, setTrendingPart] = useState(tabs[0].id)
-	const [mediaList, setMediaList] = useState<IMediaList[]>([])
-	const [isLoading, setIsLoading] = useState(false)
 
-	useFetch(
+	const { data: mediaList, isLoading } = useFetch<IMediaList[]>(
 		'get',
-		tabs.find((tab) => tab.id === trendingPart)?.url || tabs[0].url,
-		setMediaList,
-		setIsLoading
+		tabs.find((tab) => tab.id === trendingPart)?.url || tabs[0].url
 	)
 
 	// useEffect(() => {
@@ -65,7 +61,7 @@ function MediaList({ title, tabs }: Props) {
 							</ul>
 						</div>
 						<div className="grid grid-cols-4 gap-4 lg:gap-6">
-							{mediaList.map((item) => (
+							{(mediaList || []).map((item) => (
 								<MovieCard
 									key={item.id}
 									id={item.id}

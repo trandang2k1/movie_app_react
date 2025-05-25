@@ -1,19 +1,14 @@
 import { ActorList, Banner } from '@/components/MediaDetail'
 import { useFetch } from '@/hooks'
 import { IMovie } from '@/models'
-import { useState } from 'react'
 import { useParams } from 'react-router'
 
 function MovieDetailPage() {
 	const { id } = useParams()
-	const [movieInfo, setMovieInfo] = useState<IMovie>()
-	const [isLoading, setIsLoading] = useState(false)
 
-	useFetch(
+	const { data: movieInfo, isLoading } = useFetch<IMovie>(
 		'get',
-		`/movie/${id}?append_to_response=release_dates,credits&language=en-US`,
-		setMovieInfo,
-		setIsLoading
+		`/movie/${id}?append_to_response=release_dates,credits&language=en-US`
 	)
 
 	// useEffect(() => {
