@@ -1,4 +1,4 @@
-import { ICredit, IMovie, IRecommendations } from '@/models'
+import { IMovie, IRecommendations } from '@/models'
 import Actor from './Actor'
 import { useState } from 'react'
 import { useFetch } from '@/hooks'
@@ -8,15 +8,47 @@ import Loading from '@/components/Loading'
 import Information from './Information'
 
 interface Props {
-	mediaInfo?: ICredit
 	movieInfo?: IMovie
+	type: string
 }
 
-function ActorList({ mediaInfo, movieInfo }: Props) {
+function ActorList({ movieInfo, type }: Props) {
 	const { id } = useParams()
-	const { data: recommendations, isLoading } = useFetch<IRecommendations[]>('get', `/movie/${id}/recommendations`)
+	const { data: recommendations, isLoading } = useFetch<IRecommendations[]>(
+		'get',
+		`/${type}/${id}/recommendations`
+	)
 	const [show, setShow] = useState(false)
-	const moreShow = show ? mediaInfo?.cast : mediaInfo?.cast.slice(0, 4)
+
+	const casts = (type: string) => {
+		if (type === 'tv') {
+			const moreShow = show
+				? movieInfo?.aggregate_credits.cast
+				: movieInfo?.aggregate_credits.cast.slice(0, 4)
+			return moreShow?.map((item) => (
+				<Actor
+					key={item.id}
+					id={item.id}
+					name={item.name}
+					profilePath={item.profile_path}
+					character={item.roles[0].character}
+				/>
+			))
+		} else {
+			const moreShow = show
+				? movieInfo?.credits.cast
+				: movieInfo?.credits.cast.slice(0, 4)
+			return moreShow?.map((item) => (
+				<Actor
+					key={item.id}
+					id={item.id}
+					name={item.name}
+					profilePath={item.profile_path}
+					character={item.character}
+				/>
+			))
+		}
+	}
 
 	return (
 		<div className="bg-black text-[1.2vw] text-white">
@@ -24,15 +56,7 @@ function ActorList({ mediaInfo, movieInfo }: Props) {
 				<div className="flex-[2]">
 					<h1 className="mb-8 text-2xl font-bold">Actor</h1>
 					<div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
-						{moreShow?.map((actor) => (
-							<Actor
-								key={actor.cast_id}
-								id={actor.id}
-								name={actor.name}
-								profilePath={actor.profile_path}
-								character={actor.character}
-							/>
-						))}
+						{casts(type)}
 					</div>
 					<p
 						className="my-4 inline-block cursor-pointer underline underline-offset-4 select-none"
@@ -42,7 +66,7 @@ function ActorList({ mediaInfo, movieInfo }: Props) {
 					</p>
 					<h1 className="py-8 text-2xl font-bold">More like this</h1>
 					{!isLoading ? (
-						<RecommendationList mediaList={(recommendations || [])} />
+						<RecommendationList mediaList={recommendations || []} type={type}/>
 					) : (
 						<Loading />
 					)}

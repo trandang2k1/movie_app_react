@@ -33,7 +33,7 @@ const useFetch = <T>(method: string, url: string) => {
 		}
 		fetchData()
 	}, [url, method])
-	return {data, isLoading}
+	return { data, isLoading }
 }
 
 export default useFetch

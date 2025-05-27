@@ -11,27 +11,33 @@ function MovieDetailPage() {
 		`/movie/${id}?append_to_response=release_dates,credits&language=en-US`
 	)
 
-	// useEffect(() => {
-	// 	const getMovieId = async () => {
-	// 		const res = await axios.get(
-	// 			`https://api.themoviedb.org/3/movie/${id}?append_to_response=release_dates,credits&language=en-US`,
-	// 			{
-	// 				headers: {
-	// 					accept: 'application/json',
-	// 					Authorization:
-	// 						'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMGVmNWYxMTU4YjkzOTNmYjM2YjkyNGUyZTJjZjEwMiIsIm5iZiI6MTc0NDk2NTA0Mi42NjgsInN1YiI6IjY4MDIwZGIyMmU4OTU4ZjBmOTk5NzFlYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FQsRao0pm9YKNjGNPPYGz89Xx6Ouc8ny1AEYTGD56Kk',
-	// 				},
-	// 			}
-	// 		)
-	// 		setMovieInfo(res.data)
-	// 	}
-	// 	getMovieId()
-	// }, [id])
+	const certification = (
+		(movieInfo?.release_dates.results || []).find(
+			(result) => result.iso_3166_1 === 'US'
+		)?.release_dates || []
+	).find((releaseDate) => releaseDate.certification)?.certification
+
+	const crews = (movieInfo?.credits.crew || [])
+		.filter((crew) =>
+			['Director', 'Screenplay', 'Writer'].includes(crew.job)
+		)
+		.map((crew) => ({ id: crew.id, job: crew.job, name: crew.name }))
 
 	return (
 		<div>
-			<Banner mediaInfo={movieInfo} isLoading={isLoading} />
-			<ActorList mediaInfo={movieInfo?.credits} movieInfo={movieInfo} />
+			<Banner
+				backdropPath={movieInfo?.backdrop_path || ''}
+				posterPath={movieInfo?.poster_path || ''}
+				title={movieInfo?.title || ''}
+				certification={certification || ''}
+				releaseDate={movieInfo?.release_date || ''}
+				genres={movieInfo?.genres || []}
+				voteAverage={movieInfo?.vote_average || 0}
+				overview={movieInfo?.overview || ''}
+				crews={crews}
+				isLoading={isLoading}
+			/>
+			<ActorList movieInfo={movieInfo} type='movie'/>
 		</div>
 	)
 }

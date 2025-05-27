@@ -1,3 +1,4 @@
+import { IAggregateCredits } from './IAggregateCredits'
 import { ICredit } from './ICredit'
 
 export interface IMovie {
@@ -6,6 +7,7 @@ export interface IMovie {
 	belongs_to_collection: string
 	budget: number
 	credits: ICredit
+	aggregate_credits: IAggregateCredits
 	genres: {
 		id: number
 		name: string
@@ -29,6 +31,7 @@ export interface IMovie {
 		name: string
 	}[]
 	release_date: string
+	first_air_date: string
 	release_dates: {
 		results: {
 			iso_3166_1: string
@@ -41,6 +44,13 @@ export interface IMovie {
 			}[]
 		}[]
 	}
+	content_ratings: {
+		results: {
+			description: []
+			iso_3166_1: string
+			rating: string
+		}[]
+	}
 	revenue: number
 	runtime: number
 	spoken_languages: {
@@ -51,6 +61,7 @@ export interface IMovie {
 	status: string
 	tagline: string
 	title: string
+	name: string
 	video: boolean
 	vote_average: number
 	vote_count: number

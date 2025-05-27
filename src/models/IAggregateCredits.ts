@@ -1,4 +1,4 @@
-export interface ICredit {
+export interface IAggregateCredits {
 	cast: {
 		adult: boolean
 		gender: number
@@ -8,9 +8,12 @@ export interface ICredit {
 		original_name: string
 		popularity: number
 		profile_path: string
-		cast_id: number
-		character: string
-		credit_id: number
+		roles: {
+			credit_id: number
+			character: string
+			episode_count: number
+		}[]
+		total_episode_count: number
 		order: number
 	}[]
 	crew: {
@@ -22,9 +25,13 @@ export interface ICredit {
 		original_name: string
 		popularity: number
 		profile_path: string
-		credit_id: string
+		jobs: {
+			credit_id: string
+			job: string
+			episode_count: number
+		}[]
 		department: string
-		job: string
+		total_episode_count: number
 	}[]
 	id: number
 }

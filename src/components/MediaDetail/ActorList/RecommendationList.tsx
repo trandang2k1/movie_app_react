@@ -4,9 +4,10 @@ import { useState } from 'react'
 
 interface Props {
 	mediaList: IRecommendations[]
+	type: string
 }
 
-function RecommendationList({ mediaList }: Props) {
+function RecommendationList({ mediaList, type }: Props) {
 	const [show, setShow] = useState(false)
 	const someRecom = show ? mediaList : mediaList.slice(0, 8)
 
@@ -19,8 +20,10 @@ function RecommendationList({ mediaList }: Props) {
 						id={item.id}
 						posterPath={item.poster_path}
 						voteAverage={item.vote_average}
-						title={item.title}
-						releaseDate={item.release_date}
+						title={item.title || item.name}
+						releaseDate={item.release_date || item.first_air_date}
+						mediaType={item.media_type}
+						type={type}
 					/>
 				))}
 			</div>

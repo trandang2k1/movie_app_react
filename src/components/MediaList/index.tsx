@@ -10,32 +10,17 @@ interface Props {
 		id: number
 		name: string
 		url: string
+		type: string
 	}[]
 }
 
 function MediaList({ title, tabs }: Props) {
-	const [trendingPart, setTrendingPart] = useState(tabs[0].id)
+	const [trendingPart, setTrendingPart] = useState(tabs[0].type)
 
 	const { data: mediaList, isLoading } = useFetch<IMediaList[]>(
 		'get',
-		tabs.find((tab) => tab.id === trendingPart)?.url || tabs[0].url
+		tabs.find((tab) => tab.type === trendingPart)?.url || tabs[0].url
 	)
-
-	// useEffect(() => {
-	// 	const getAllTrending = async () => {
-	// 		const res = await axios.get(
-	// 			tabs.find((tab) => tab.id === trendingPart)?.url || tabs[0].url,
-	// 			{
-	// 				headers: {
-	// 					Accept: 'application/json',
-	// 					Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMGVmNWYxMTU4YjkzOTNmYjM2YjkyNGUyZTJjZjEwMiIsIm5iZiI6MTc0NDk2NTA0Mi42NjgsInN1YiI6IjY4MDIwZGIyMmU4OTU4ZjBmOTk5NzFlYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FQsRao0pm9YKNjGNPPYGz89Xx6Ouc8ny1AEYTGD56Kk`,
-	// 				},
-	// 			}
-	// 		)
-	// 		setMediaList(res.data.results)
-	// 	}
-	// 	getAllTrending()
-	// }, [trendingPart, tabs])
 
 	return (
 		<>
@@ -49,9 +34,9 @@ function MediaList({ title, tabs }: Props) {
 									return (
 										<li
 											key={tab.id}
-											className={`cursor-pointer rounded px-2 py-1 text-center md:w-[100px] ${trendingPart === tab.id ? 'bg-white text-black' : 'text-white'}`}
+											className={`cursor-pointer rounded px-2 py-1 text-center md:w-[100px] ${trendingPart === tab.type ? 'bg-white text-black' : 'text-white'}`}
 											onClick={() =>
-												setTrendingPart(tab.id)
+												setTrendingPart(tab.type)
 											}
 										>
 											{tab.name}
@@ -60,7 +45,7 @@ function MediaList({ title, tabs }: Props) {
 								})}
 							</ul>
 						</div>
-						<div className="grid grid-cols-4 gap-4 lg:gap-6">
+						<div className="grid grid-cols-6 gap-4 lg:gap-6">
 							{(mediaList || []).map((item) => (
 								<MovieCard
 									key={item.id}
@@ -71,6 +56,8 @@ function MediaList({ title, tabs }: Props) {
 									releaseDate={
 										item.release_date || item.first_air_date
 									}
+									mediaType={item.media_type}
+									type={trendingPart}
 								/>
 							))}
 						</div>
