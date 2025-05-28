@@ -22,6 +22,9 @@ function MediaList({ title, tabs }: Props) {
 		tabs.find((tab) => tab.type === trendingPart)?.url || tabs[0].url
 	)
 
+	const [show, setShow] = useState(false)
+	const moreShow = show ? mediaList : mediaList?.slice(0, 12)
+
 	return (
 		<>
 			{!isLoading ? (
@@ -46,7 +49,7 @@ function MediaList({ title, tabs }: Props) {
 							</ul>
 						</div>
 						<div className="grid grid-cols-6 gap-4 lg:gap-6">
-							{(mediaList || []).map((item) => (
+							{(moreShow || []).map((item) => (
 								<MovieCard
 									key={item.id}
 									id={item.id}
@@ -61,6 +64,12 @@ function MediaList({ title, tabs }: Props) {
 								/>
 							))}
 						</div>
+						<p
+							className="my-4 inline-block cursor-pointer underline underline-offset-4 select-none"
+							onClick={() => setShow(!show)}
+						>
+							{!show ? 'Show More' : 'Show Less'}
+						</p>
 					</div>
 				</div>
 			) : (

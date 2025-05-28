@@ -104,7 +104,7 @@ function Banner({
 									<p>{selectCrews('Director')}</p>
 								</div>
 								<div>
-									<p>Writer</p>
+									<p className="font-bold">Writer</p>
 									<p>{selectCrews('Writer')}</p>
 								</div>
 							</div>
