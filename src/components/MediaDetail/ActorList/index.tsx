@@ -31,7 +31,8 @@ function ActorList({ movieInfo, type }: Props) {
 					id={item.id}
 					name={item.name}
 					profilePath={item.profile_path}
-					character={item.roles[0].character}
+					character={item.roles.map(role => role.character).join(', ')}
+					episode_count={item.roles[0].episode_count}
 				/>
 			))
 		} else {
@@ -66,7 +67,10 @@ function ActorList({ movieInfo, type }: Props) {
 					</p>
 					<h1 className="py-8 text-2xl font-bold">More like this</h1>
 					{!isLoading ? (
-						<RecommendationList mediaList={recommendations || []} type={type}/>
+						<RecommendationList
+							mediaList={recommendations || []}
+							type={type}
+						/>
 					) : (
 						<Loading />
 					)}

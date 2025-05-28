@@ -5,9 +5,10 @@ interface Props {
 	name: string
 	profilePath: string
 	character: string
+	episode_count?: number
 }
 
-function Actor({ id, name, profilePath, character }: Props) {
+function Actor({ id, name, profilePath, character, episode_count }: Props) {
 	return (
 		<div
 			className="rounded-lg border border-slate-200 break-words shadow-sm"
@@ -20,7 +21,7 @@ function Actor({ id, name, profilePath, character }: Props) {
 			<div className="p-2">
 				<h2 className="font-bold">{name}</h2>
 				<p>{character}</p>
-				{/* <p>dấdawdasdawdas</p> */}
+				<p>{`${episode_count} ${((episode_count || 0) > 1) ? "Episodes" : "Episode" }`}</p>
 			</div>
 		</div>
 	)
