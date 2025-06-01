@@ -12,7 +12,7 @@ function RecommendationList({ mediaList, type }: Props) {
 	const someRecom = show ? mediaList : mediaList.slice(0, 8)
 
 	return (
-		<div>
+		<div className="text-[1.vw]">
 			<div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
 				{someRecom.map((item) => (
 					<MovieCard
@@ -27,10 +27,12 @@ function RecommendationList({ mediaList, type }: Props) {
 					/>
 				))}
 			</div>
-            <p
+			<p
 				className="my-4 inline-block cursor-pointer underline underline-offset-4 select-none"
 				onClick={() => setShow(!show)}
-			>{!show ? "Show More" : "Show Less"}</p>
+			>
+				{!show ? 'Show More' : 'Show Less'}
+			</p>
 		</div>
 	)
 }

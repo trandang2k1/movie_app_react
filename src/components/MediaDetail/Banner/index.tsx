@@ -84,7 +84,7 @@ function Banner({
 									/>
 									Rating
 								</div>
-								<button>
+								<button className='cursor-pointer select-none'>
 									<FontAwesomeIcon
 										icon={faPlay}
 										className="mr-1"

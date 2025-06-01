@@ -21,7 +21,9 @@ function Actor({ id, name, profilePath, character, episode_count }: Props) {
 			<div className="p-2">
 				<h2 className="font-bold">{name}</h2>
 				<p>{character}</p>
-				<p>{`${episode_count} ${((episode_count || 0) > 1) ? "Episodes" : "Episode" }`}</p>
+				{
+					episode_count && <p>{`${episode_count} ${((episode_count || 0) > 1) ? "Episodes" : "Episode" }`}</p>
+				}
 			</div>
 		</div>
 	)

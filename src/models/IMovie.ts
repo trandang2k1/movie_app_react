@@ -17,6 +17,7 @@ export interface IMovie {
 	imdb_id: string
 	original_language: string
 	original_title: string
+	original_name: string
 	overview: string
 	popularity: number
 	poster_path: string
@@ -57,6 +58,22 @@ export interface IMovie {
 		english_name: string
 		iso_639_1: string
 		name: string
+	}[]
+	networks: {
+		id: number,
+		name: string
+		logo_path: string
+		origin_country: string
+	}[]
+	seasons: {
+		air_date: string
+		episode_count: number
+		id: number
+		name: string
+		overview: string
+		poster_path: string
+		season_number: number
+		vote_average: number
 	}[]
 	status: string
 	tagline: string

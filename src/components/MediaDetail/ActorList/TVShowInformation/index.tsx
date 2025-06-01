@@ -5,7 +5,7 @@ interface Props {
 	movieInfo?: IMovie
 }
 
-function Information({ movieInfo }: Props) {
+function TVShowInformation({ movieInfo }: Props) {
 	const uniqueCountries = movieInfo?.production_companies
 		? [
 				...new Set(
@@ -15,12 +15,12 @@ function Information({ movieInfo }: Props) {
 				),
 			]
 		: []
-	
+
 	return (
 		<div className="text-[1.2vw]">
 			<div className="mb-4">
-				<h1 className="font-bold">Original Title</h1>
-				<p>{movieInfo?.original_title}</p>
+				<h1 className="font-bold">Original Name</h1>
+				<p>{movieInfo?.original_name}</p>
 			</div>
 			<div className="mb-4">
 				<h1 className="font-bold">Original Country</h1>
@@ -47,15 +47,19 @@ function Information({ movieInfo }: Props) {
 				<p>{movieInfo?.status}</p>
 			</div>
 			<div className="mb-4">
-				<h1 className="font-bold">Budget</h1>
-				<p>{currentFormat(movieInfo?.budget || 0, 'USD')}</p>
-			</div>
-			<div className="mb-4">
-				<h1 className="font-bold">Revenue</h1>
-				<p>{currentFormat(movieInfo?.revenue || 0, 'USD')}</p>
+				<h1 className="font-bold">Network</h1>
+				<div className='flex gap-3 flex-wrap'>
+					{movieInfo?.networks.map((tvShow) => (
+						<img
+							className="mt-1 w-5 invert sm:w-10 md:w-15"
+							key={tvShow.id}
+							src={`http://media.themoviedb.org/t/p/h30${tvShow.logo_path}`}
+						/>
+					))}
+				</div>
 			</div>
 		</div>
 	)
 }
 
-export default Information
+export default TVShowInformation

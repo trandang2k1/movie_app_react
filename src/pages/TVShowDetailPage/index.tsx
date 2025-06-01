@@ -1,4 +1,5 @@
 import { ActorList, Banner } from '@/components/MediaDetail'
+import TVShowSeason from '@/components/MediaDetail/ActorList/TVShowSeason'
 import { useFetch } from '@/hooks'
 import { IMovie } from '@/models'
 import { useParams } from 'react-router'
