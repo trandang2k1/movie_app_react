@@ -1,5 +1,7 @@
 import CircularProgressBar from '@/components/CircularProgressBar'
 import Loading from '@/components/Loading'
+import { useModalContext } from '@/contexts/ModalProvider'
+import { IVideo } from '@/models'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -21,6 +23,7 @@ interface Props {
 		name: string
 	}[]
 	isLoading: boolean
+	trailerVideoKey: string
 }
 
 function Banner({
@@ -34,7 +37,10 @@ function Banner({
 	overview,
 	crews,
 	isLoading,
+	trailerVideoKey
 }: Props) {
+	const { setIsShowing, setContent } = useModalContext()
+
 	const selectCrews = (value: string) => {
 		const select = crews
 			.filter((crew) => crew.job === value)
@@ -84,7 +90,13 @@ function Banner({
 									/>
 									Rating
 								</div>
-								<button className='cursor-pointer select-none'>
+								<button
+									className="cursor-pointer select-none"
+									onClick={() => {
+										setIsShowing(true)
+										setContent(<iframe title='Trailer' src={`https://www.youtube.com/embed/${trailerVideoKey}`} className='w-[50vw] aspect-video'/>)
+									}}
+								>
 									<FontAwesomeIcon
 										icon={faPlay}
 										className="mr-1"

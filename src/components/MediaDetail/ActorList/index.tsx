@@ -59,12 +59,12 @@ function ActorList({ movieInfo, type }: Props) {
 		<div className="bg-black text-[1.2vw] text-white">
 			<div className="mx-auto flex max-w-screen-lg gap-6 px-6 py-8">
 				<div className="flex-[2]">
-					<h1 className="mb-8 text-[1.4vw] font-bold">Actor</h1>
+					<h1 className="my-8 text-[1.4vw] font-bold">Actor</h1>
 					<div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
 						{casts(type)}
 					</div>
 					<p
-						className="my-4 inline-block cursor-pointer underline underline-offset-4 select-none"
+						className="mt-4 inline-block cursor-pointer underline underline-offset-4 select-none"
 						onClick={() => setShow(!show)}
 					>
 						{show ? 'Show Less' : 'Show More'}
@@ -72,7 +72,7 @@ function ActorList({ movieInfo, type }: Props) {
 					{type === 'tv' && (
 						<TVShowSeason tvSeason={movieInfo?.seasons || []} />
 					)}
-					<h1 className="mb-8 text-[1.4vw] font-bold">More like this</h1>
+					<h1 className="my-8 text-[1.4vw] font-bold">More like this</h1>
 					{!isLoading ? (
 						recommendations?.length !== 0 ? (
 							<RecommendationList
@@ -87,7 +87,7 @@ function ActorList({ movieInfo, type }: Props) {
 					)}
 				</div>
 				<div className="flex-1">
-					<h1 className="mb-8 text-[1.4vw] font-bold">Information</h1>
+					<h1 className="my-8 text-[1.4vw] font-bold">Information</h1>
 					{type === 'tv' ? (
 						<TVShowInformation movieInfo={movieInfo} />
 					) : (

@@ -28,7 +28,7 @@ function RecommendationList({ mediaList, type }: Props) {
 				))}
 			</div>
 			<p
-				className="my-4 inline-block cursor-pointer underline underline-offset-4 select-none"
+				className="mt-4 inline-block cursor-pointer underline underline-offset-4 select-none"
 				onClick={() => setShow(!show)}
 			>
 				{!show ? 'Show More' : 'Show Less'}

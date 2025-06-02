@@ -1,5 +1,6 @@
 import { IAggregateCredits } from './IAggregateCredits'
 import { ICredit } from './ICredit'
+import { IVideo } from './IVideo'
 
 export interface IMovie {
 	adult: boolean
@@ -75,6 +76,7 @@ export interface IMovie {
 		season_number: number
 		vote_average: number
 	}[]
+	videos: IVideo
 	status: string
 	tagline: string
 	title: string

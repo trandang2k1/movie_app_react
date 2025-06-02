@@ -20,7 +20,7 @@ function TVShowSeason({ tvSeason }: Props) {
 
 	return (
 		<div className="text-[1.3vw]">
-			<h1 className="mb-8 text-[1.4vw] font-bold">Seasons</h1>
+			<h1 className="my-8 text-[1.4vw] font-bold">Seasons</h1>
 			<div className="flex flex-col gap-4">
 				{moreShow.map((season) => (
 					<div
@@ -29,7 +29,7 @@ function TVShowSeason({ tvSeason }: Props) {
 					>
 						<img
 							src={`http://media.themoviedb.org/t/p/w300${season.poster_path}`}
-							className="rounded-lg md:max-w-[130px] "
+							className="rounded-lg md:max-w-[130px]"
 						/>
 						<div className="space-y-1">
 							<p className="text-[1.4vw] font-bold">
@@ -62,14 +62,14 @@ function TVShowSeason({ tvSeason }: Props) {
 					</div>
 				))}
 			</div>
-			<p
-				className="my-4 inline-block cursor-pointer underline underline-offset-4 select-none"
-				onClick={() => setShow(!show)}
-			>
-				{
-					!show ? "Show More" : "Show Less"
-				}
-			</p>
+			{tvSeason.length > 3 && (
+				<p
+					className="inline-block cursor-pointer underline underline-offset-4 select-none"
+					onClick={() => setShow(!show)}
+				>
+					{!show ? 'Show More' : 'Show Less'}
+				</p>
+			)}
 		</div>
 	)
 }

@@ -1,5 +1,4 @@
 import { ActorList, Banner } from '@/components/MediaDetail'
-import TVShowSeason from '@/components/MediaDetail/ActorList/TVShowSeason'
 import { useFetch } from '@/hooks'
 import { IMovie } from '@/models'
 import { useParams } from 'react-router'
@@ -9,7 +8,7 @@ function TVShowDetailPage() {
 
 	const { data: tvInfo, isLoading } = useFetch<IMovie>(
 		'get',
-		`/tv/${id}?append_to_response=content_ratings,aggregate_credits&language=en-US`
+		`/tv/${id}?append_to_response=content_ratings,aggregate_credits,videos&language=en-US`
 	)
 
 	const certification = (tvInfo?.content_ratings.results || []).find(result => result.iso_3166_1 === 'US')?.rating
@@ -33,6 +32,7 @@ function TVShowDetailPage() {
 				certification={certification || ''}
 				crews={crews}
 				isLoading={isLoading}
+				trailerVideoKey={(tvInfo?.videos.results || []).find(video => video.type === "Trailer")?.key || ''}
 			/>
 			<ActorList movieInfo={tvInfo} type='tv'/>
 		</div>

@@ -8,7 +8,7 @@ function MovieDetailPage() {
 
 	const { data: movieInfo, isLoading } = useFetch<IMovie>(
 		'get',
-		`/movie/${id}?append_to_response=release_dates,credits&language=en-US`
+		`/movie/${id}?append_to_response=release_dates,credits,videos&language=en-US`
 	)
 
 	const certification = (
@@ -36,6 +36,7 @@ function MovieDetailPage() {
 				overview={movieInfo?.overview || ''}
 				crews={crews}
 				isLoading={isLoading}
+				trailerVideoKey={(movieInfo?.videos.results || []).find(video => video.type === "Trailer")?.key || ''}
 			/>
 			<ActorList movieInfo={movieInfo} type='movie'/>
 		</div>
